@@ -36,6 +36,13 @@
       "product": "Mobile",
       "amount": 25000,
       "status": "Pending"
+    },
+    {
+      "id": "3",
+      "userId": "UFyWp9Viexo",
+      "product": "Keyboard",
+      "amount": 2000,
+      "status": "Delivered"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

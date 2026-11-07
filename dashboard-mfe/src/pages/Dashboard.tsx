@@ -17,11 +17,14 @@ function Dashboard() {
   const [error, setError] = useState("");
 
   const user = useSelector((state: RootState) => state.auth.user);
+  console.log("user:", user);
 
   useEffect(() => {
+    if (!user?.id) return;
+
     const fetchOrders = async () => {
       try {
-        const data = await getOrders();
+        const data = await getOrders(user.id);
         setOrders(data);
       } catch (error) {
         setError("Failed to fetch orders");
@@ -31,7 +34,7 @@ function Dashboard() {
     };
 
     fetchOrders();
-  }, []);
+  }, [user?.id]);
 
   if (loading) return <p>Loading orders...</p>;
   if (error) return <p>{error}</p>;
