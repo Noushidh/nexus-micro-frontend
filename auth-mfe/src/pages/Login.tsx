@@ -48,7 +48,7 @@ function Login() {
         },
       });
 
-      navigate("/dashboard");
+      navigate("/dashboard", { replace: true });
 
       console.log("Login successful:", user);
       setMessage("Login successful!");

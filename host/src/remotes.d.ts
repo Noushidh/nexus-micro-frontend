@@ -21,3 +21,11 @@ declare module "auth/ForgotPassword" {
 
   export default ForgotPassword;
 }
+
+declare module "dashboard/Dashboard" {
+  import { ComponentType } from "react";
+
+  const Dashboard: ComponentType;
+
+  export default Dashboard;
+}
