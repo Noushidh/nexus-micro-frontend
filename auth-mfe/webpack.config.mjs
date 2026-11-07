@@ -52,6 +52,8 @@ export default {
 
       exposes: {
         "./Login": "./src/pages/Login.tsx",
+        "./Register": "./src/pages/Register.tsx",
+        "./ForgotPassword": "./src/pages/ForgotPassword.tsx",
       },
 
       shared: {
@@ -63,6 +65,18 @@ export default {
         "react-dom": {
           singleton: true,
           requiredVersion: "^19.0.0",
+        },
+        "react-redux": {
+          singleton: true,
+          requiredVersion: "^9.0.0",
+        },
+        "react-router-dom": {
+          singleton: true,
+          requiredVersion: "7.18.5",
+        },
+        "react-router": {
+          singleton: true,
+          requiredVersion: "7.18.5",
         },
       },
     }),

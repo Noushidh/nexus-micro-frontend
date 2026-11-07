@@ -25,7 +25,7 @@ export default {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
-    publicPath: "auto",
+    publicPath: "/",
     clean: true,
   },
 
@@ -46,6 +46,7 @@ export default {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html",
+      publicPath: "/",
     }),
 
     new ModuleFederationPlugin({
@@ -64,6 +65,18 @@ export default {
         "react-dom": {
           singleton: true,
           requiredVersion: "^19.0.0",
+        },
+        "react-redux": {
+          singleton: true,
+          requiredVersion: "^9.0.0",
+        },
+        "react-router-dom": {
+          singleton: true,
+          requiredVersion: "7.18.5",
+        },
+        "react-router": {
+          singleton: true,
+          requiredVersion: "7.18.5",
         },
       },
     }),
