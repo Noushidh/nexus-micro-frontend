@@ -6,8 +6,10 @@ const Register = React.lazy(() => import("auth/Register"));
 const ForgotPassword = React.lazy(() => import("auth/ForgotPassword"));
 import ProtectedRoute from "./components/ProtectedRoute";
 
-import DashboardLayout from "./components/DashboardLayout";
+import DashboardLayout from "./layouts/DashboardLayout";
 const Dashboard = React.lazy(() => import("dashboard/Dashboard"));
+
+const Profile = React.lazy(() => import("profile/Profile"));
 
 function App() {
   return (
@@ -19,6 +21,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route element={<DashboardLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>{" "}
         </Route>{" "}
         <Route path="/" element={<Navigate to="/auth" replace />} />

@@ -29,3 +29,11 @@ declare module "dashboard/Dashboard" {
 
   export default Dashboard;
 }
+
+declare module "profile/Profile" {
+  import { ComponentType } from "react";
+
+  const Profile: ComponentType;
+
+  export default Profile;
+}
