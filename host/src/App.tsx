@@ -11,6 +11,8 @@ const Dashboard = React.lazy(() => import("dashboard/Dashboard"));
 
 const Profile = React.lazy(() => import("profile/Profile"));
 
+const Settings = React.lazy(() => import("settings/Settings"));
+
 function App() {
   return (
     <Suspense fallback={<p>Loading Auth...</p>}>
@@ -22,6 +24,7 @@ function App() {
           <Route element={<DashboardLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
           </Route>{" "}
         </Route>{" "}
         <Route path="/" element={<Navigate to="/auth" replace />} />

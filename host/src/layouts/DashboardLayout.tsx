@@ -3,11 +3,13 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { RootState, AppDispatch } from "../store/store";
 import { logout } from "../store/authSlice";
 import Sidebar from "../components/Sidebar";
+import "../styles/theme.css";
 
 function DashboardLayout() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
+  const theme = useSelector((state: RootState) => state.settings.theme);
   const user = useSelector((state: RootState) => state.auth.user);
 
   const handleLogout = () => {
@@ -16,28 +18,20 @@ function DashboardLayout() {
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
+    <div className={`dashboard-layout ${theme}`}>
       <Sidebar />
 
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <header
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "15px 25px",
-            borderBottom: "1px solid #ddd",
-          }}
-        >
+      <div className="dashboard-content">
+        <header className="dashboard-header">
           <h2>Nexus</h2>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+          <div className="header-user">
             <span>Welcome, {user?.name || "Guest"}</span>
             <button onClick={handleLogout}>Logout</button>
           </div>
         </header>
 
-        <main style={{ padding: "20px" }}>
+        <main className="dashboard-main">
           <Outlet />
         </main>
       </div>

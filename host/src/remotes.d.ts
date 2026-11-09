@@ -37,3 +37,11 @@ declare module "profile/Profile" {
 
   export default Profile;
 }
+
+declare module"settings/Settings" {
+  import { ComponentType } from "react";
+
+  const Profile: ComponentType;
+
+  export default Settings;
+}

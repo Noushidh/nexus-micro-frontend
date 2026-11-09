@@ -56,6 +56,7 @@ export default {
         auth: "auth@http://localhost:3001/remoteEntry.js",
         dashboard: "dashboard@http://localhost:3002/remoteEntry.js",
         profile: "profile@http://localhost:3003/remoteEntry.js",
+        settings: "settings@http://localhost:3004/remoteEntry.js",
       },
 
       shared: {
