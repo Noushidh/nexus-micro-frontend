@@ -25,7 +25,7 @@ export default {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
-    publicPath: "/",
+    publicPath: "auto",
     clean: true,
   },
 
@@ -51,6 +51,8 @@ export default {
 
     new ModuleFederationPlugin({
       name: "host",
+
+      filename: "remoteEntry.js",
 
       remotes: {
         auth: "auth@http://localhost:3001/remoteEntry.js",

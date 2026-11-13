@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getOrders } from "../api/orderApi";
 import { useSelector } from "react-redux";
-import { RootState } from "../types/redux";
+import { RootState } from "../../Types/redux";
 
 interface Order {
   id: string;
