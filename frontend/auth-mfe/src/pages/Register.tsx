@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { registerUser } from "../api/authApi";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,11 +27,17 @@ function Register() {
 
       setMessage("Registration successful!");
 
+      navigate("/auth");
+
       setName("");
       setEmail("");
       setPassword("");
     } catch (error) {
-      setMessage("Registration failed. Please try again.");
+      setMessage(
+        error instanceof Error
+          ? error.message
+          : "Registration failed. Please try again.",
+      );
       console.error(error);
     } finally {
       setLoading(false);

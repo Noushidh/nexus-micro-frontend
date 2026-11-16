@@ -1,26 +1,18 @@
-const API_URL = "http://localhost:5000";
+const API_URL = "http://localhost:7000";
 
-export interface User {
-  id: string;
+export interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
+export interface RegisterData {
   name: string;
   email: string;
   password: string;
 }
 
-export const getUsers = async (): Promise<User[]> => {
-  const response = await fetch(`${API_URL}/users`);
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch users");
-  }
-
-  return response.json();
-};
-
-export const registerUser = async (
-  userData: Omit<User, "id">,
-): Promise<User> => {
-  const response = await fetch(`${API_URL}/users`, {
+export const registerUser = async (userData: RegisterData) => {
+  const response = await fetch(`${API_URL}/api/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -28,9 +20,29 @@ export const registerUser = async (
     body: JSON.stringify(userData),
   });
 
+  const data = await response.json();
+
   if (!response.ok) {
-    throw new Error("Registration failed");
+    throw new Error(data.message || "Registration failed");
   }
 
-  return response.json();
+  return data;
+};
+
+export const loginUserApi = async (credentials: LoginCredentials) => {
+  const response = await fetch(`${API_URL}/api/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Login failed");
+  }
+
+  return data;
 };

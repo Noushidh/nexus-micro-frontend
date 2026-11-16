@@ -1,31 +1,17 @@
 import { useState } from "react";
-import { getUsers, User } from "../api/authApi";
+import { loginUserApi } from "../api/authApi";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { generateMockToken } from "../utils/token";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const loginUser = async (email: string, password: string): Promise<User> => {
-    const users = await getUsers();
-
-    const user = users.find(
-      (user) => user.email === email && user.password === password,
-    );
-
-    if (!user) {
-      throw new Error("Invalid email or password");
-    }
-
-    return user;
-  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,24 +20,20 @@ function Login() {
       setLoading(true);
       setMessage("");
 
-      const user = await loginUser(email, password);
-
-      const { password: _, ...safeUser } = user;
-
-      const token = generateMockToken(user.id);
+      const data = await loginUserApi({ email, password });
 
       dispatch({
         type: "auth/setCredentials",
         payload: {
-          user: safeUser,
-          token,
+          user: data.user,
+          token: data.token,
         },
       });
 
       navigate("/dashboard", { replace: true });
 
-      console.log("Login successful:", user);
-      setMessage("Login successful!");
+      console.log("Login successful", data);
+      setMessage(data.message || "Login successful");
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "Login failed");
     } finally {
@@ -86,6 +68,7 @@ function Login() {
       </form>
 
       {message && <p>{message}</p>}
+      <Link to="/auth/register">register</Link>||
       <Link to="/auth/forgot-password">Forgot Password?</Link>
     </div>
   );
